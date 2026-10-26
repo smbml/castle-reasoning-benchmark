@@ -1,0 +1,18 @@
+{
+  "repo_id": "alexmzhang/castle-reasoning",
+  "revision": "0bf9ccdd51861eac5112280c6bbb601fdc3ca98c",
+  "files": [
+    {
+      "path": "campaign-1k-20261010/index.json",
+      "bytes": 420948,
+      "git_blob_sha1": "e885a661d138b1975b5e775228ef2d927d457f6f",
+      "sha256": "e7a69921456cd37b7925102fc98aebf8cc5981df6459be36a88d6bf4ac0321a6"
+    },
+    {
+      "path": "campaign-tasks-20261011/index.json",
+      "bytes": 184145,
+      "git_blob_sha1": "bde6090aedaac29491dbc60fc79b7f1cf71aaa84",
+      "sha256": "a55315cd6e5fe1fb1d6930a3436b42af39c168aa02ef97ad065e95a302cdb43b"
+    }
+  ]
+}

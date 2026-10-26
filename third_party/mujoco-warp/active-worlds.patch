@@ -1,0 +1,527 @@
+--- a/mujoco_warp/__init__.py
++++ b/mujoco_warp/__init__.py
+@@ -12,6 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ # ==============================================================================
++#
++# Modified for Castle Reasoning: export active-world stepping.
+
+ """Public API for MJWarp."""
+
+@@ -24,6 +26,7 @@
+
+ # isort: off
+ from mujoco_warp._src.forward import step as step
++from mujoco_warp._src.forward import step_active as step_active
+ from mujoco_warp._src.types import Model as Model
+ from mujoco_warp._src.types import Data as Data
+ # isort: on
+--- a/mujoco_warp/_src/forward.py
++++ b/mujoco_warp/_src/forward.py
+@@ -12,6 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ # ==============================================================================
++#
++# Modified for Castle Reasoning: skip integration for paused worlds.
+
+ from typing import Optional
+
+@@ -291,15 +293,274 @@
+   return _next_time
+
+
+-def _advance(m: Model, d: Data, qacc: wp.array, qvel: Optional[wp.array] = None):
++@wp.kernel
++def _next_position_active(
++  active: wp.array[bool],
++  # Model:
++  opt_timestep: wp.array[float],
++  jnt_type: wp.array[int],
++  jnt_qposadr: wp.array[int],
++  jnt_dofadr: wp.array[int],
++  # Data in:
++  qpos_in: wp.array2d[float],
++  qvel_in: wp.array2d[float],
++  # In:
++  qvel_scale_in: float,
++  # Data out:
++  qpos_out: wp.array2d[float],
++):
++  worldid, jntid = wp.tid()
++  if not active[worldid]:
++    return
++  timestep = opt_timestep[worldid % opt_timestep.shape[0]]
++
++  jnttype = jnt_type[jntid]
++  qpos_adr = jnt_qposadr[jntid]
++  dof_adr = jnt_dofadr[jntid]
++  qpos = qpos_in[worldid]
++  qpos_next = qpos_out[worldid]
++  qvel = qvel_in[worldid]
++
++  if jnttype == JointType.FREE:
++    qpos_pos = wp.vec3(qpos[qpos_adr], qpos[qpos_adr + 1], qpos[qpos_adr + 2])
++    qvel_lin = wp.vec3(qvel[dof_adr], qvel[dof_adr + 1], qvel[dof_adr + 2]) * qvel_scale_in
++
++    qpos_new = qpos_pos + timestep * qvel_lin
++
++    qpos_quat = wp.quat(
++      qpos[qpos_adr + 3],
++      qpos[qpos_adr + 4],
++      qpos[qpos_adr + 5],
++      qpos[qpos_adr + 6],
++    )
++    qvel_ang = wp.vec3(qvel[dof_adr + 3], qvel[dof_adr + 4], qvel[dof_adr + 5]) * qvel_scale_in
++
++    qpos_quat_new = math.quat_integrate(qpos_quat, qvel_ang, timestep)
++
++    qpos_next[qpos_adr + 0] = qpos_new[0]
++    qpos_next[qpos_adr + 1] = qpos_new[1]
++    qpos_next[qpos_adr + 2] = qpos_new[2]
++    qpos_next[qpos_adr + 3] = qpos_quat_new[0]
++    qpos_next[qpos_adr + 4] = qpos_quat_new[1]
++    qpos_next[qpos_adr + 5] = qpos_quat_new[2]
++    qpos_next[qpos_adr + 6] = qpos_quat_new[3]
++
++  elif jnttype == JointType.BALL:
++    qpos_quat = wp.quat(qpos[qpos_adr + 0], qpos[qpos_adr + 1], qpos[qpos_adr + 2], qpos[qpos_adr + 3])
++    qvel_ang = wp.vec3(qvel[dof_adr], qvel[dof_adr + 1], qvel[dof_adr + 2]) * qvel_scale_in
++
++    qpos_quat_new = math.quat_integrate(qpos_quat, qvel_ang, timestep)
++
++    qpos_next[qpos_adr + 0] = qpos_quat_new[0]
++    qpos_next[qpos_adr + 1] = qpos_quat_new[1]
++    qpos_next[qpos_adr + 2] = qpos_quat_new[2]
++    qpos_next[qpos_adr + 3] = qpos_quat_new[3]
++
++  else:  # if jnt_type in (JointType.HINGE, JointType.SLIDE):
++    qpos_next[qpos_adr] = qpos[qpos_adr] + timestep * qvel[dof_adr] * qvel_scale_in
++
++
++@wp.kernel
++def _next_velocity_active(
++  active: wp.array[bool],
++  # Model:
++  opt_timestep: wp.array[float],
++  # Data in:
++  qvel_in: wp.array2d[float],
++  qacc_in: wp.array2d[float],
++  # In:
++  qacc_scale_in: float,
++  # Data out:
++  qvel_out: wp.array2d[float],
++):
++  worldid, dofid = wp.tid()
++  if not active[worldid]:
++    return
++  timestep = opt_timestep[worldid % opt_timestep.shape[0]]
++  qvel_out[worldid, dofid] = qvel_in[worldid, dofid] + qacc_scale_in * qacc_in[worldid, dofid] * timestep
++
++
++@wp.kernel
++def _next_activation_active(
++  active: wp.array[bool],
++  # Model:
++  opt_timestep: wp.array[float],
++  actuator_dyntype: wp.array[int],
++  actuator_actadr: wp.array[int],
++  actuator_actnum: wp.array[int],
++  actuator_dynprm: wp.array2d[vec10],
++  actuator_gainprm: wp.array2d[vec10],
++  actuator_biasprm: wp.array2d[vec10],
++  actuator_actlimited: wp.array[bool],
++  actuator_actrange: wp.array2d[wp.vec2],
++  # Data in:
++  act_in: wp.array2d[float],
++  act_dot_in: wp.array2d[float],
++  actuator_velocity_in: wp.array2d[float],
++  # In:
++  act_dot_scale: float,
++  limit: bool,
++  # Data out:
++  act_out: wp.array2d[float],
++):
++  worldid, uid = wp.tid()
++  if not active[worldid]:
++    return
++  opt_timestep_id = worldid % opt_timestep.shape[0]
++  actuator_dynprm_id = worldid % actuator_dynprm.shape[0]
++  actuator_actrange_id = worldid % actuator_actrange.shape[0]
++  actuator_gainprm_id = worldid % actuator_gainprm.shape[0]
++  actuator_biasprm_id = worldid % actuator_biasprm.shape[0]
++
++  actadr = actuator_actadr[uid]
++  actnum = actuator_actnum[uid]
++  dyntype = actuator_dyntype[uid]
++
++  if dyntype == DynType.DCMOTOR:
++    dynprm = actuator_dynprm[actuator_dynprm_id, uid]
++    gainprm = actuator_gainprm[actuator_gainprm_id, uid]
++    biasprm = actuator_biasprm[actuator_biasprm_id, uid]
++    slots = util_misc.dcmotor_slots(dynprm, gainprm)
++
++    for j in range(actadr, actadr + actnum):
++      offset = j - actadr
++      act = act_in[worldid, j]
++      act_dot = act_dot_in[worldid, j]
++
++      if offset == slots[4]:  # current
++        R = gainprm[0]
++        te = wp.max(MJ_MINVAL, dynprm[0])
++        act = act + act_dot * te * (1.0 - wp.exp(-opt_timestep[opt_timestep_id] / te))
++      elif offset == slots[3]:  # bristle
++        F_C = biasprm[3]
++        F_S = biasprm[4]
++        v_S = biasprm[5]
++        sigma0 = dynprm[5]
++        velocity = actuator_velocity_in[worldid, uid]
++        g = util_misc.lugre_stribeck(velocity, F_C, F_S, v_S)
++
++        a = -sigma0 * wp.abs(velocity) / wp.max(MJ_MINVAL, g)
++        h = opt_timestep[opt_timestep_id]
++        exp_ah = wp.exp(a * h)
++        int_h = h
++        if wp.abs(a) > MJ_MINVAL:
++          int_h = (exp_ah - 1.0) / a
++        act = exp_ah * act + int_h * velocity
++      elif offset == slots[1]:  # integral
++        act = act + act_dot * opt_timestep[opt_timestep_id]
++        Imax = dynprm[8]
++        if Imax > 0.0:
++          act = wp.clamp(act, -Imax, Imax)
++      else:  # temperature and slew
++        act = act + act_dot * opt_timestep[opt_timestep_id]
++
++      act_out[worldid, j] = act
++  else:
++    for j in range(actadr, actadr + actnum):
++      act = next_act(
++        opt_timestep[opt_timestep_id],
++        dyntype,
++        actuator_dynprm[actuator_dynprm_id, uid],
++        actuator_actrange[actuator_actrange_id, uid],
++        act_in[worldid, j],
++        act_dot_in[worldid, j],
++        act_dot_scale,
++        limit and actuator_actlimited[uid],
++      )
++      act_out[worldid, j] = act
++
++
++@cache_kernel
++def _next_time_active_builder(warn_overflow: int):
++  @wp.kernel(module="unique", enable_backward=False)
++  def _next_time(
++    active: wp.array[bool],
++    # Model:
++    opt_timestep: wp.array[float],
++    is_sparse: bool,
++    # Data in:
++    nefc_in: wp.array[int],
++    time_in: wp.array[float],
++    efc_J_rownnz_in: wp.array2d[int],
++    efc_J_rowadr_in: wp.array2d[int],
++    nworld_in: int,
++    naconmax_in: int,
++    njmax_in: int,
++    njmax_nnz_in: int,
++    nacon_in: wp.array[int],
++    ncollision_in: wp.array[int],
++    # Data out:
++    time_out: wp.array[float],
++    overflow_out: wp.array[int],
++  ):
++    worldid = wp.tid()
++    if not active[worldid]:
++      return
++    time_out[worldid] = time_in[worldid] + opt_timestep[worldid % opt_timestep.shape[0]]
++    nefc = nefc_in[worldid]
++
++    if nefc > njmax_in:
++      if wp.static(bool(warn_overflow & OverflowType.NEFC)):
++        wp.printf(
++          "nefc overflow - please increase njmax beyond %u\n"
++          "To disable the print warning: m.opt.warn_overflow &= ~mjw.OverflowType.NEFC (or = 0 for all)\n",
++          njmax_in,
++        )
++      overflow_out[worldid] = overflow_out[worldid] | OverflowType.NEFC
++    elif nefc > 0 and is_sparse:
++      efcid = wp.min(nefc, njmax_in) - 1
++      efc_nnz = efc_J_rowadr_in[worldid, efcid] + efc_J_rownnz_in[worldid, efcid]
++      if efc_nnz > njmax_nnz_in:
++        if wp.static(bool(warn_overflow & OverflowType.NJMAX_NNZ)):
++          wp.printf(
++            "njmax_nnz overflow - please increase njmax_nnz beyond %u\n"
++            "To disable the print warning: m.opt.warn_overflow &= ~mjw.OverflowType.NJMAX_NNZ (or = 0 for all)\n",
++            njmax_nnz_in,
++          )
++        overflow_out[worldid] = overflow_out[worldid] | OverflowType.NJMAX_NNZ
++
++    ncollision = ncollision_in[0]
++    if ncollision > naconmax_in:
++      if worldid == 0 and wp.static(bool(warn_overflow & OverflowType.BROADPHASE)):
++        wp.printf(
++          "broadphase overflow - please increase nconmax beyond %u or naconmax beyond %u\n"
++          "To disable the print warning: m.opt.warn_overflow &= ~mjw.OverflowType.BROADPHASE (or = 0 for all)\n",
++          naconmax_in // nworld_in,
++          naconmax_in,
++        )
++      overflow_out[worldid] = overflow_out[worldid] | OverflowType.BROADPHASE
++
++    nacon = nacon_in[0]
++    if nacon > naconmax_in:
++      if worldid == 0 and wp.static(bool(warn_overflow & OverflowType.NARROWPHASE)):
++        wp.printf(
++          "narrowphase overflow - please increase nconmax beyond %u or naconmax beyond %u\n"
++          "To disable the print warning: m.opt.warn_overflow &= ~mjw.OverflowType.NARROWPHASE (or = 0 for all)\n",
++          naconmax_in // nworld_in,
++          naconmax_in,
++        )
++      overflow_out[worldid] = overflow_out[worldid] | OverflowType.NARROWPHASE
++
++  return _next_time
++
++
++@wp.kernel
++def _warmstart_active(active: wp.array[bool], qacc: wp.array2d[float], warmstart: wp.array2d[float]):
++  worldid, dofid = wp.tid()
++  if active[worldid]:
++    warmstart[worldid, dofid] = qacc[worldid, dofid]
++
++
++def _advance(m: Model, d: Data, qacc: wp.array, qvel: Optional[wp.array] = None, active: Optional[wp.array] = None):
+   """Advance state and time given activation derivatives and acceleration."""
+-  # TODO(team): can we assume static timesteps?
++  # An absent mask preserves the original integration kernels.
++  prefix = [] if active is None else [active]
+
+   # advance activations
+   wp.launch(
+-    _next_activation,
++    _next_activation if active is None else _next_activation_active,
+     dim=(d.nworld, m.nu),
+-    inputs=[
++    inputs=prefix + [
+       m.opt.timestep,
+       m.actuator_dyntype,
+       m.actuator_actadr,
+@@ -319,9 +580,9 @@
+   )
+
+   wp.launch(
+-    _next_velocity,
++    _next_velocity if active is None else _next_velocity_active,
+     dim=(d.nworld, m.nv),
+-    inputs=[m.opt.timestep, d.qvel, qacc, 1.0],
++    inputs=prefix + [m.opt.timestep, d.qvel, qacc, 1.0],
+     outputs=[d.qvel],
+   )
+
+@@ -329,9 +590,9 @@
+   qvel_in = qvel or d.qvel
+
+   wp.launch(
+-    _next_position,
++    _next_position if active is None else _next_position_active,
+     dim=(d.nworld, m.njnt),
+-    inputs=[m.opt.timestep, m.jnt_type, m.jnt_qposadr, m.jnt_dofadr, d.qpos, qvel_in, 1.0],
++    inputs=prefix + [m.opt.timestep, m.jnt_type, m.jnt_qposadr, m.jnt_dofadr, d.qpos, qvel_in, 1.0],
+     outputs=[d.qpos],
+   )
+
+@@ -339,9 +600,9 @@
+   history.insert_ctrl_history(m, d)
+
+   wp.launch(
+-    _next_time_builder(int(m.opt.warn_overflow)),
++    (_next_time_builder if active is None else _next_time_active_builder)(int(m.opt.warn_overflow)),
+     dim=d.nworld,
+-    inputs=[
++    inputs=prefix + [
+       m.opt.timestep,
+       m.is_sparse,
+       d.nefc,
+@@ -358,7 +619,10 @@
+     outputs=[d.time, d.overflow],
+   )
+
+-  wp.copy(d.qacc_warmstart, d.qacc)
++  if active is None:
++    wp.copy(d.qacc_warmstart, d.qacc)
++  else:
++    wp.launch(_warmstart_active, dim=(d.nworld, m.nv), inputs=[active, d.qacc, d.qacc_warmstart])
+
+   sleep_enabled = bool(m.opt.enableflags & EnableBit.SLEEP) and not bool(m.opt.disableflags & DisableBit.ISLAND)
+   if sleep_enabled:
+@@ -403,7 +667,7 @@
+
+
+ @event_scope
+-def euler(m: Model, d: Data):
++def euler(m: Model, d: Data, active: Optional[wp.array] = None):
+   """Euler integrator, semi-implicit in velocity."""
+   # integrate damping implicitly
+   if not (m.opt.disableflags & (DisableBit.EULERDAMP | DisableBit.DAMPER)):
+@@ -430,9 +694,9 @@
+       outputs=[M],
+     )
+     smooth.factor_solve_i(m, d, M, qLD, qLDiagInv, qacc, d.efc.Ma)
+-    _advance(m, d, qacc)
++    _advance(m, d, qacc, active=active)
+   else:
+-    _advance(m, d, d.qacc)
++    _advance(m, d, d.qacc, active=active)
+
+
+ def _rk_perturb_state(
+@@ -983,7 +1247,7 @@
+
+
+ @event_scope
+-def implicit(m: Model, d: Data):
++def implicit(m: Model, d: Data, active: Optional[wp.array] = None):
+   """Integrates fully implicit in velocity."""
+   if m.opt.integrator == IntegratorType.IMPLICIT:
+     # 1. Smooth velocity derivatives into M-structure
+@@ -1005,7 +1269,7 @@
+     qacc = wp.empty((d.nworld, m.nv), dtype=float)
+     smooth.factor_solve_lu(m, d, d.qLU, qacc, d.efc.Ma)
+     _launch_implicit_free_body_solve(m, d, qacc)
+-    _advance(m, d, qacc)
++    _advance(m, d, qacc, active=active)
+   elif ~(m.opt.disableflags | ~(DisableBit.ACTUATION | DisableBit.SPRING | DisableBit.DAMPER)):
+     # qDeriv is in M-structure; the scratch qLD matches d.qLD (per-block).
+     qDeriv = wp.empty((d.nworld, m.nC), dtype=float)
+@@ -1028,9 +1292,9 @@
+     qacc = wp.empty((d.nworld, m.nv), dtype=float)
+     smooth.factor_solve_i(m, d, qDeriv, qLD, qLDiagInv, qacc, d.efc.Ma)
+     _launch_implicit_free_body_solve(m, d, qacc)
+-    _advance(m, d, qacc)
++    _advance(m, d, qacc, active=active)
+   else:
+-    _advance(m, d, d.qacc)
++    _advance(m, d, d.qacc, active=active)
+
+
+ @event_scope
+@@ -1787,7 +2051,7 @@
+
+
+ @event_scope
+-def forward(m: Model, d: Data):
++def forward(m: Model, d: Data, active: Optional[wp.array] = None):
+   """Forward dynamics."""
+   sleep_enabled = bool(m.opt.enableflags & EnableBit.SLEEP) and not bool(m.opt.disableflags & DisableBit.ISLAND)
+   if sleep_enabled:
+@@ -1809,7 +2073,7 @@
+   fwd_actuation(m, d)
+   fwd_acceleration(m, d, factorize=True)
+
+-  solver.solve(m, d)
++  solver.solve(m, d, active=active)
+   if m.opt.run_rne_postconstraint or (not (m.opt.disableflags & DisableBit.SENSOR) and m.sensor_rne_postconstraint):
+     smooth.rne_postconstraint(m, d)
+   sensor.sensor_acc(m, d, skip_rne_postconstraint=True)
+@@ -1865,3 +2129,25 @@
+   else:
+     # note: RK4 defaults to Euler
+     euler(m, d)
++
++
++def step_active(m: Model, d: Data, active: wp.array):
++  """Advance and solve selected worlds; physics setup still runs globally.
++
++  Frozen integration fields: qpos, qvel, act, time and qacc_warmstart.
++  Inputs (ctrl, applied forces, mocap) are caller-owned and must also be masked.
++  Derived state and global contact packing are not frozen.
++  """
++  if m.opt.integrator not in (IntegratorType.EULER, IntegratorType.IMPLICITFAST):
++    raise ValueError("Active stepping requires Euler or implicitfast")
++  if m.nhistory or m.opt.enableflags & EnableBit.SLEEP:
++    raise ValueError("Active stepping does not support history buffers or sleeping")
++  if m.callback.control or m.callback.act_dyn or m.callback.act_gain or m.callback.act_bias or m.callback.sensor or m.callback.passive or m.callback.contactfilter:
++    raise ValueError("Active stepping does not support callbacks")
++  if active.dtype != wp.bool or active.shape != (d.nworld,) or active.device != d.qpos.device:
++    raise ValueError("Active mask must be a device bool array with one entry per world")
++  forward(m, d, active=active)
++  if m.opt.integrator == IntegratorType.EULER:
++    euler(m, d, active)
++  else:
++    implicit(m, d, active)
+--- a/mujoco_warp/_src/solver.py
++++ b/mujoco_warp/_src/solver.py
+@@ -12,6 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ # ==============================================================================
++#
++# Modified for Castle Reasoning: mask paused worlds during solving.
+
+ import dataclasses
+ from math import ceil
+@@ -3616,9 +3618,27 @@
+     _update_gradient(m, d, ctx, compact=compact)
+
+
++@wp.kernel
++def _solve_active_worlds(
++  active: wp.array[bool],
++  done: wp.array[bool],
++  search_unchanged: wp.array[bool],
++  nsolving: wp.array[int],
++):
++  """Exclude paused rows from iterations and count only active solver worlds."""
++  worldid = wp.tid()
++  done[worldid] = not active[worldid]
++  # Incremental Newton uses this mask instead of done for matrix products.
++  search_unchanged[worldid] = not active[worldid]
++  if active[worldid]:
++    wp.atomic_add(nsolving, 0, 1)
++
++
+ @event_scope
+-def solve(m: types.Model, d: types.Data):
++def solve(m: types.Model, d: types.Data, active: wp.array | None = None):
+   if m.opt.enableflags & types.EnableBit.SLEEP:
++    if active is not None:
++      raise ValueError("Active solving does not support sleeping")
+     # Self-contained like the island branch below: rebuild the active-DOF mapping from
+     # tree_awake so solve() works when called directly (not only via fwd_acceleration).
+     island.update_active_dofs(m, d)
+@@ -3632,10 +3652,10 @@
+     d.solver_niter.fill_(0)
+   else:
+     ctx = _create_solver_context(m, d)
+-    _solve(m, d, ctx)
+-
+-
+-def _solve(m: types.Model, d: types.Data, ctx: SolverContext, compact: bool = False):
++    _solve(m, d, ctx, active=active)
++
++
++def _solve(m: types.Model, d: types.Data, ctx: SolverContext, compact: bool = False, active: wp.array | None = None):
+   """Finds forces that satisfy constraints."""
+   warmstart = not (m.opt.disableflags & types.DisableBit.WARMSTART)
+   wp.launch(
+@@ -3663,7 +3683,18 @@
+       block_dim=m.block_dim.solve_init_search_cg,
+     )
+
+-  nsolving = wp.full(shape=(1,), value=d.nworld, dtype=int)
++  if active is None:
++    nsolving = wp.full(shape=(1,), value=d.nworld, dtype=int)
++  else:
++    # Recompute inside the captured graph: masks can change between launches.
++    # Initialization above deliberately rebuilds derived scratch for all rows.
++    nsolving = wp.zeros(shape=(1,), dtype=int)
++    wp.launch(
++      _solve_active_worlds,
++      dim=d.nworld,
++      inputs=[active],
++      outputs=[ctx.done, ctx.search_unchanged, nsolving],
++    )
+   if m.opt.iterations != 0 and m.opt.graph_conditional:
+     # Note: the iteration kernel (indicated by while_body) is repeatedly launched
+     # as long as condition_iteration is not zero.

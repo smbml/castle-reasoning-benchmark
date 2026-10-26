@@ -1,0 +1,72 @@
+:root {
+  color-scheme: light;
+  color: #19372d;
+  background: #f4f5ef;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 1400px; margin: auto; padding: 24px 36px 72px; }
+a { color: #226352; text-underline-offset: 4px; }
+nav { display: flex; gap: 28px; border-bottom: 1px solid #d5ded3; padding: 12px 0 24px; }
+nav span { margin-left: auto; }
+header { padding: 48px 0 22px; max-width: 960px; }
+h1 { font-family: Georgia, serif; font-weight: 400; font-size: clamp(42px, 5vw, 72px); line-height: 1.1; margin: 12px 0 18px; letter-spacing: -2px; }
+h2 { font-size: 26px; letter-spacing: -.5px; margin: 0 0 12px; }
+h3 { font-size: 18px; margin: 22px 0 8px; }
+p { margin: 10px 0 18px; max-width: 90ch; }
+.eyebrow { font-size: 12px; letter-spacing: 2px; color: #5e7469; }
+.lede { font-size: 20px; color: #52695d; max-width: 740px; }
+.status { display: inline-block; border: 1px solid #c4d2bd; background: #e8eee0; border-radius: 5px; padding: 8px 12px; color: #526349; font-size: 13px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 22px 0; border-top: 1px solid #d5ded3; border-bottom: 1px solid #d5ded3; }
+.stats b { display: block; font-size: 34px; font-weight: 500; }
+.stats span { display: block; color: #607167; font-size: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 24px; padding: 20px 0; font-size: 13px; color: #50645a; }
+.legend span::before { display: inline-block; content: ""; width: 13px; height: 13px; margin-right: 7px; border-radius: 3px; }
+.pillar::before { background: #cc925c; }
+.beam::before { background: #549284; }
+.slab::before { background: #5e8ba6; }
+.block::before { background: #c5725d; }
+section { margin-top: 48px; scroll-margin-top: 20px; }
+.section-title { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 24px; }
+.card { text-decoration: none; background: #fafaf7; border: 1px solid #d9dfd4; border-radius: 10px; overflow: hidden; transition: box-shadow .15s, transform .15s; }
+.card:hover { box-shadow: 0 7px 24px #183e2914; transform: translateY(-2px); }
+.card img { width: 100%; height: auto; display: block; }
+.card-copy { padding: 15px 20px 20px; border-top: 1px solid #e5e8de; }
+.card-copy strong { font-size: 17px; letter-spacing: 1px; }
+.card-copy span { float: right; font-size: 13px; color: #5b6e62; }
+.card-copy small { display: block; margin-top: 6px; font-size: 12px; color: #5b6e62; }
+.views, .columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+figure { margin: 0; border: 1px solid #d9dfd4; border-radius: 8px; overflow: hidden; background: #fafaf7; }
+figure img { width: 100%; height: auto; display: block; }
+figcaption { padding: 14px 20px; font-size: 13px; border-top: 1px solid #e5e8de; color: #5b6e62; }
+.graph { width: 100%; display: block; border: 1px solid #d9dfd4; border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; border-bottom: 1px solid #d5ded3; padding: 10px 14px 10px 0; }
+th { color: #657668; font-size: 12px; text-transform: uppercase; letter-spacing: .7px; }
+.table-scroll { overflow-x: auto; }
+dl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 15px; }
+dd { margin: 0; }
+dt, .muted { color: #657668; }
+.trace { columns: 2; padding-left: 24px; font-size: 14px; }
+.trace li { break-inside: avoid; padding-bottom: 8px; }
+.button { display: inline-block; padding: 10px 16px; border: 1px solid #b7c9bb; border-radius: 6px; text-decoration: none; margin: 3px 6px 3px 0; background: #fcfcf8; font-size: 14px; }
+aside { margin-top: 40px; padding: 22px; background: #e9eee2; border-radius: 8px; color: #54664f; }
+footer { padding: 24px; text-align: center; color: #758171; font-size: 12px; border-top: 1px solid #d5ded3; }
+@media (max-width: 1000px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  main { padding: 14px 16px 48px; }
+  nav { gap: 16px; font-size: 13px; flex-wrap: wrap; }
+  header { padding-top: 30px; }
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .cards, .columns, .views { grid-template-columns: 1fr; }
+  .section-title { display: block; }
+  .trace { columns: 1; }
+  .legend { gap: 12px; }
+}

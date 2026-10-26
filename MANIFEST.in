@@ -1,0 +1,14 @@
+include pixi.toml pixi.lock
+recursive-include scripts *.py
+include third_party/mujoco-warp/LICENSE third_party/mujoco-warp/AUTHORS
+include third_party/mujoco-warp/pyproject.toml
+include third_party/mujoco-warp/active-worlds.patch
+include third_party/mujoco-warp/upstream.json
+include third_party/mujoco-warp/README.md
+graft third_party/mujoco-warp/mujoco_warp
+recursive-include tests *.py *.json *.npz *.yaml
+recursive-include docs/media *.png *.gif
+global-exclude __pycache__ *.py[cod]
+include LICENSE THIRD_PARTY_NOTICES.md AGENTS.md
+recursive-include LICENSES *.txt
+include docs/setup.md docs/tasks.md docs/runtime-build.md

@@ -1,0 +1,19 @@
+# Qualification distribution: separated supported cube columns, no overhangs.
+seed: 20260916
+block_count: 8
+worlds: 16
+required: 20
+max_batches: 12
+max_control_steps: 5500
+home_control_steps: 350
+settle_control_steps: 250
+output: artifacts/robot-assembly-20260915
+device: cuda:0
+render: true
+learning_images: true
+learning_image_size: 128
+hydra:
+  run:
+    dir: ${output}/hydra
+  job:
+    chdir: false

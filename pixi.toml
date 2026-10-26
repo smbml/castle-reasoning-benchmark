@@ -1,0 +1,29 @@
+[workspace]
+name = "castle-reasoning-benchmark"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+python = "3.12.*"
+pip = "*"
+pytest = "8.4.2.*"
+ruff = "*"
+python-build = "*"
+setuptools = ">=77,<85"
+wheel = "*"
+ffmpeg = "*"
+
+[pypi-dependencies]
+castle-reasoning-benchmark = { path = ".", editable = false, extras = ["download", "test"] }
+mujoco-warp = { path = "third_party/mujoco-warp", editable = false }
+
+[activation.env]
+MUJOCO_GL = "egl"
+OPENBLAS_NUM_THREADS = "1"
+OMP_NUM_THREADS = "1"
+
+[tasks]
+test = "python -m pytest -q"
+check-runtime = "castle-benchmark check-runtime"
+download-tasks = "castle-benchmark download"
+build = "python -m build"

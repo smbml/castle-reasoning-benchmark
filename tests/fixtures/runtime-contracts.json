@@ -1,0 +1,1341 @@
+{
+  "normalization": "AST with import identities resolved to current owners; documentation and import/pass statements omitted. The stage removal-selector delegation alone expands to its original call. Numerical literals, operators, branch conditions and call arguments retained.",
+  "definitions": [
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "edge_valid",
+      "sha256": "3ce72c568c47c7252120a470517242514db4993869bf81ae305fb910d6431ac5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "connect",
+      "sha256": "a88aa31f9aa4f56a69925bfb57e9585a521841c5817800569ede908d7cdca7e3"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "inverse_kinematics",
+      "sha256": "ac61ca536b9cd554192de7237f81da6e59a5d37b1c6484eb06a56da45b3dad37"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "execution_departures",
+      "sha256": "3faeda723bc59e2563292099351f2f4879150a3fa964ac6104832aa7cc38526d"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.__init__",
+      "sha256": "4e451875b7e688224f45be65ad0e34749f3a36623d69bb5f43710a6cadb76c1e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.set_state",
+      "sha256": "784a8443ceb1815e34fd6516b843c4fb71fa94c5a154bd3522e62570ad907560"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.allowed_pair",
+      "sha256": "23bfae34f86e60ec3e2335ab04c65733d2f587581507efb75ec989f994310a18"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.violations",
+      "sha256": "18db7c3d8d09093e607be855a84461833ef0966b13e6c50ed86be7123ada7d32"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.valid",
+      "sha256": "ac4f7c9ace5a039304d4bc39bd0f585607583961ab16f442215bbf6a95427eee"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.destination_contacts",
+      "sha256": "b931c70ae20cb12f573240c897290345df654eb726121ddce1135d93073cb7b2"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.departure_contacts",
+      "sha256": "48d09526f977c81fe5462338edff98fcfd0aeb60f0180bcf4105dddeac28f8e9"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/collision.py",
+      "definition": "Scene.attachment",
+      "sha256": "a195eddbc465dd30895269cc8276bbe57dcb51b5d1e5ef25f678b22685d1cf32"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "Grasp.pose",
+      "sha256": "8d786e4135848af4f81bf19b8144e5e2ae6489d8ec37eaa9286b880939c5a7b3"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "propose",
+      "sha256": "543852dba7c6011cf5be108838e09e7eb9626ddce90a89487acfb34e09cafffb"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "exposed_edge_proposals",
+      "sha256": "cad2c9d5732b4c121bec8aebb51aeb2ddff91d8606723281c65e1b7f80809918"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "side_proposals",
+      "sha256": "fba468514a950108af0728749835bffa9d472dcfdfbbf5690944d649d58a3ba6"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "Aperture.__init__",
+      "sha256": "b432ed80c1fad635884d2b6acae861f6cf2af2866b21736f98443cef71ba7bd2"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "Aperture.calibrate",
+      "sha256": "337f87fcba4405c285c2b649a3ee965eb724c7493acd8170692216b68cea1a38"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "Aperture.joints",
+      "sha256": "f9ae6a43aba5252abcdf25f45ea1b9266ada4631d8658592c55c78c4b390a7b0"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/grasps.py",
+      "definition": "Aperture.closure",
+      "sha256": "740edede1c073cf29b6c578dd8f15ba8afb9e9378f5e72046866aea8f855be12"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.__init__",
+      "sha256": "50601d33b8d9b699807ac42bd1a05e92d631ac2d320a89ae35706d1035253225"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.check_budget",
+      "sha256": "299703ccd842f91a59dd579c82b32a5e816dbcce6642111fbff64800f5c820a0"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._check",
+      "sha256": "dd6e4e7ce3e9fda81fc5044f6d32caa21e79806b08450103a95a904f42418d5b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._edge",
+      "sha256": "506ee74cb87e407c9965e8c873be680d3b5f3b872749075911039a81228cf6c5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._cartesian",
+      "sha256": "86e00a6a0e48c6ce4f5e0a997a8f144eb199755091faf27f7454a50642bc1a8f"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._transit",
+      "sha256": "3756a811b4842aa659ffb4dd7a9f2d2c31d5f14477a1b18da727dd0aefcb0b20"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.object_tops",
+      "sha256": "8b9d2c49c5d2f91adf3c39b82fc7a5ec1d7ca2b93c01159c9261e90f354342c9"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._source_supports",
+      "sha256": "87454d3636eafb6078e7fe8261ed00302217fca6c660149b31609b14d851fd1e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._pickup",
+      "sha256": "686522baa94e47c663dfdbd8785fa5226346dc423f5db5adec9de0e41856b3e5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._candidate",
+      "sha256": "d09b112d70fb49641c739b6f048cdb9df9540558572949441a2a589d7d72e5ed"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.placement_destination",
+      "sha256": "85f97330f883e1b3d2826637e18dc8a3007895d311eca1282db470c373ae28a7"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.seating_destination",
+      "sha256": "65bc94edd8f10066af88f5d3da0725e570064528d68508bde397f2292c0f574e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.continuation",
+      "sha256": "06c26e659d6e160c33a1996222cdf2ac222660989aff012cb592bab24b8dfa30"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.setdown",
+      "sha256": "5285ce9816280fedd6500d6fd946f1dedb02440425b48bc9424fa9d4d834ac41"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._destination_obstructed",
+      "sha256": "cbfecc818c3be653541547d3931577c92528cf0e12e7b615dbb84286b5b4db38"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._source_obstructed",
+      "sha256": "f4c871f0103ce523a6f67e3fc51fdac5906330a8665d1516f19ac03d28126ccd"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner.plan",
+      "sha256": "9fcab850aa6a50af8746d9118d5c3d89c58b4c9756e209bde7581029c10bfce1"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "Planner._plan",
+      "sha256": "1306bacb170e61a9f52376b47647d3d9a28a94fd5a7259524c1b6f0c1242bd94"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover.__init__",
+      "sha256": "860b2a53b75d0ac52850c86055b240eb7fc2e3102cee0af47b320f1100a54f7b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover._budget",
+      "sha256": "3e1783497f233b41a56a3aaa0bd19789cde56166a27e5a3aefc7aa1e2ce44b5e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover._execute",
+      "sha256": "a127ac21c7be6476f7f2d2e262cf6171d9b6948615671ca3f64c0c21d8426e90"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover._cartesian",
+      "sha256": "e6494d94620172f15bd01d573cba04317cc85344534d0fb20a33a2cb490045a1"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover._route",
+      "sha256": "74dbb71d0bedfbded281e922d47dd6c63ac4c367df5f427c803b76ed1408e1b0"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover.push",
+      "sha256": "6cdcd768c7efe76173d52a1f993624df053d114f241a34609e8f99bd67d39a68"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover._can_slide",
+      "sha256": "9e67bdc338d1a63834c175b200a20b7eb8afbf4f10cb9715b7f2fda96bae4705"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/plates.py",
+      "definition": "PlateMover.move",
+      "sha256": "6750481a00c538029042560686599fabcca9cf4aa389035ba331538ba1a7b106"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/regrasp.py",
+      "definition": "support_margin",
+      "sha256": "022f9b60364b72962794855ba6b46ead0b144ac7cced01d5552701b7ae412839"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/regrasp.py",
+      "definition": "_clearance",
+      "sha256": "16d979cf550572abbeb18b94c7cf311ae8962f83f2add52b057e9adffb9c0bbf"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/regrasp.py",
+      "definition": "candidates",
+      "sha256": "d0221e7007320a30c8fdb6ac9592927f7993807c15196129761dc111cda2d8d8"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/regrasp.py",
+      "definition": "plan",
+      "sha256": "9382e3d96be0a2c7b6ef1a2d2cb8e5607948d8b25571af5e9fa53080b100e1b4"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/regrasp.py",
+      "definition": "_plan",
+      "sha256": "d887e81961d9140f1f37052b915dc08bd644794e612eaa1c6291d74ffa0749e0"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "finite_prefix",
+      "sha256": "f5954cd6991cc0572e95c5a39f002bc9892b298be5192029ecfe9ef64e84e58f"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "references",
+      "sha256": "9a99d03532aa9842ac8078e7a871efde9e0104a7893fd2a3adbba574b2b0b33b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "servo_offsets",
+      "sha256": "3c9c619ca47aed501455fc69d3d3debcededfc108907c8fe50d197c55f0054c6"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "follow_reference",
+      "sha256": "c26dda1ca059dd78da6b88914cfe6f1fc0cfefb9b845fa58c8e1f226a894b104"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/guards.py",
+      "definition": "contact_guard",
+      "sha256": "4c08f92b81441a16e00be071931e473e7023b82450f7d42858cc26592097f2d7"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/guards.py",
+      "definition": "contact_evidence",
+      "sha256": "e4c9434fa0dd47a5b3456bad74071e32be2f58fe1ed1039d5772f2d9aaa6a782"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/guards.py",
+      "definition": "attachment_guard",
+      "sha256": "d56c1ec1a381cf71270f10aae8d81822fb3259bb50a49a50550b82a577328c55"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "clamp_targets",
+      "sha256": "97e8ac15302e3723a637fa7907de5523ce870902e6f2fd0900af690e72c5d916"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "PathControl.__init__",
+      "sha256": "ea92fe7e0cdf5554a43b0bf4e12047257736d3103a41ba09a52ea6c9f0693a0c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "PathControl.launch_device_control_step",
+      "sha256": "bd7cb0967e7b1926a25ce8f79c804d4b05442bcb202bf50b3edd1e2e57c8444c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/guards.py",
+      "definition": "contact_limits",
+      "sha256": "cc41f86dfe294d6fa226c68bbb5f61fee918543ce3fc4b225c264b0342971ef4"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/tracking.py",
+      "definition": "execute_segment",
+      "sha256": "d463bdfd61a2b6b74470139454c9328f1454677cf1ec1049d4e94132da0c3443"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "follow_reference",
+      "sha256": "e414b85a3edea46d72f6f75f7840cb8e8342b0d45cf14f19225e6a94ece5fa4b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "contact_guard",
+      "sha256": "21de6c73dd40ef700fe800193c253411a31c9cf20992c5ebe499aafff53392b8"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "attachment_guard",
+      "sha256": "67960cfcceb3dea6c03ec09c510a4de349e22b467e9243c9f56db7ceba360f0b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "apply_grip_effort",
+      "sha256": "8060f786dd6e87e0539c30a235aeb0e49fbcc975d4427661abb95c6b5f321c13"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "prepare",
+      "sha256": "5bec051d1c9d9207199d28df25483ba48f12fd2d0f841cf6add3bd1be2764d3a"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "execute",
+      "sha256": "34d91c6e2638e684097a85a8717c45b0206aba06f61851565c31ce607091e645"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "_array_bindings",
+      "sha256": "bdb5ca555663a883ac17c413a9ef0ddedd774c202f19ff97965b53859af103a9"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "record_active",
+      "sha256": "416eca793be7957e5e9e5b7773b445f0c2e13e7b4d3852bcba7dfb8c7f6f5562"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "_PreparedExecution.__init__",
+      "sha256": "1d6ad203f2561f990be7ea00ebc53c323645de831f61ba6ab1894dcb3e83711b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "_PreparedExecution.upload",
+      "sha256": "7598fc7175fea81602b51593c8ae43df9801c6656affeec133655fb0be242ced"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "execute_prepared",
+      "sha256": "52d0a5351bf2ec672fa6e818235bf4bbc9ca25cdcf1e0c83237724df2a3dded4"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "_world_health",
+      "sha256": "7623e069b6f28cb80564894f674db4c6a7262da9401d147130d1a212b2b482ca"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "_quarantine",
+      "sha256": "331bd4fc25f8015e118d7a421c415208cb3e7ffb9a759d683c3a501c71a12764"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "replay_grip_effort",
+      "sha256": "0785e3283a3d6ee9702ae10c2623d4ab0b29e6b1a33dfe0829b1e88f43f515b2"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/batch_tracking.py",
+      "definition": "replay",
+      "sha256": "a60615a019e5a8ecfde8a91c5298f035c173d063d79739125177f86f892a97a2"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/active.py",
+      "definition": "apply_action",
+      "sha256": "a8a8510fee59ad38b892a238a44845ad6a83d4421058ac3fbe508dc026cc7d3b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/active.py",
+      "definition": "ActivePathControl.__init__",
+      "sha256": "72df1fb80ad822565df299f4d5b14a82fbc1c26aa728fd25be4c20125155a809"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/active.py",
+      "definition": "ActivePathControl.launch_device_control_step",
+      "sha256": "03c575776bf47a556fde776169b03e29e345bc2548162bae981c13554c945bd8"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/recovery.py",
+      "definition": "ExecutionGuard.__init__",
+      "sha256": "eb810e1dc8382e8eb6de9fd02c288c41a784273a36f129cd19b43114f6b7aa6d"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/recovery.py",
+      "definition": "retryable",
+      "sha256": "12d8328519a1f8007a043dd98c5f44ad9d7e4d36419101a08740ad1173845259"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/recovery.py",
+      "definition": "assess",
+      "sha256": "97593593e75b73d30e1ea9336abb94eadeb02682bc1ae996525e70a607010f1e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/recovery.py",
+      "definition": "release_path",
+      "sha256": "036fd1402e7920c70a30123cbecd4cf6ee6a3bf8009e989c99d1a35b5c655b95"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/recovery.py",
+      "definition": "remaining_lift",
+      "sha256": "4c521233683ea7dffd7ca4480ffef33283acbc9d5e42677e8b77328aa1dbd70c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/recovery.py",
+      "definition": "recover",
+      "sha256": "9eea4bea3af229173b46fbf0008c38bd2e01cb2b7fc83c654ba06edda3b0940c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/models.py",
+      "definition": "validate_contact_impedance",
+      "sha256": "2933a3f5d632c5d3aaca9df2cacbba076989ef2a306c60401493552e6061368e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/models.py",
+      "definition": "make_model",
+      "sha256": "5721c1dbe249d1ad4ae8e951279fb524aff56ae1002c8000235fc3b593910f12"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "grasp_parameters",
+      "sha256": "3301ef4faec8be18cb452daf56481beaebbc0741b77a81cef7a720d798ab5cc9"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "configure_grasps",
+      "sha256": "95dcc99d3d1010bb54c838858a77320fc11ee5f8c1766052a33306c1efd2448d"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/success.py",
+      "definition": "orientation_error",
+      "sha256": "e6f23a5f3d8b8e7ec67bed7c8338734cebe3f191bee0b8f482b6d606dcbfd004"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/success.py",
+      "definition": "waypoint_check",
+      "sha256": "dc1b03d56d6c8a63ea39657f8227c41e64f37e7ad383c4bb146a2f79f8f25c41"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/success.py",
+      "definition": "verify_hold",
+      "sha256": "b3c90a5c674d32dcebc6a70d51989b03b38213ef0c210a856a2686eb1e93d04d"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/success.py",
+      "definition": "contact_report",
+      "sha256": "9203249c0c6b9c17f2046b3bb12c7219501b42cbb808169f8e7c164db7fc9267"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/traces.py",
+      "definition": "home_action",
+      "sha256": "935c723cac9a012e352d37df7cb5ab5e07e803ea8361871253b93df0b7968bf7"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/traces.py",
+      "definition": "replay_action",
+      "sha256": "33cf301958e4d918a751b2362d7d7b4373e6b76798a483a960d085b886dc1052"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/traces.py",
+      "definition": "record_state",
+      "sha256": "9c7daac67b51f5f4bae98ee5e1c180e11cd3751562e88fb78aab4cfe3e847546"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/traces.py",
+      "definition": "advance",
+      "sha256": "2a102a8bc1d17d0e6d9561b5d90dd910efc6db031df7f688e17d3f2352b35c83"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/traces.py",
+      "definition": "apply_grip_effort",
+      "sha256": "c9319ea187819c80bf477a147191256051e8ff630858993fc66258b85b153bd7"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/traces.py",
+      "definition": "run_controls",
+      "sha256": "1e88421a4b3214f72694c0c3fb734b8365208405d3a94f0e3c809984b053009e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/models.py",
+      "definition": "scene_capacities",
+      "sha256": "29dc636d38a6ef978aaeeea043eff5d9eb0bc97c7c0896e6bd769e4ec753c616"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "make_collector",
+      "sha256": "4ee3b428580146367d47eb9674a14cdb435092b54611bfc97e3f5fae6a161628"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "set_task",
+      "sha256": "b2e9b01bdca030f6d74458a3d935832ef08029460b53228da5c9373d3c0410ff"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/gripper.py",
+      "definition": "shape_aperture",
+      "sha256": "f165e5e92d873d3791b712c5755da6a6f01f3b1d591a151b216de7c4ee6b8e66"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/gripper.py",
+      "definition": "opening_closure",
+      "sha256": "16b613194b82069f26090b8e94a906192b48679ec35f8adc2bc171ed4a51d4c1"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "CuboidController.__init__",
+      "sha256": "7689d9c293227c51298e6d8d5001096221dacb999e073ec8d5b6b068c6f996cb"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "CuboidController.launch_device_control_step",
+      "sha256": "c69cd62b038b1d35631a028e9c90943c61bcafe2f1be5e42d2cbe4cf85b92e14"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "CuboidController.set_widths",
+      "sha256": "b700db678e80c79e4dc2c14c1bf27bf7da53d61d0ded536a1cdc87cd0cd05a34"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/gripper.py",
+      "definition": "shape_hold",
+      "sha256": "227027950677d7105468329fa17a858be1a71b487cd871a1fa3aa47f22df65fa"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/gripper.py",
+      "definition": "bound_targets",
+      "sha256": "e80ed65fb74e1d8351ee35612554c402b52fd3124160fdb4f2788e4f048cbbfa"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "CuboidControl.__init__",
+      "sha256": "3d41b2b192da13f7d42560b351ade324123d57a1a958b63dece790350416f2c3"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "CuboidControl.reset_recovery",
+      "sha256": "c9462cb33f123a6ca660905c0cf54f0109487fc5798fcdc784cc235c8694bb3e"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "CuboidControl.set_widths",
+      "sha256": "e4998d8776e301a0fc26bb6869f5c90b4146d64576f2d01555255c220a85e576"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "CuboidControl.launch_device_control_step",
+      "sha256": "672c23f8a03a49053a468f51be9aa564ea03a94a44945ca631b147ddfd7dd545"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/guards.py",
+      "definition": "motion_check",
+      "sha256": "56e610b1c7677e39b5e21f32bdac5d6ecfbb377f1137f3c9d5220a850ed97bd6"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "make_guard",
+      "sha256": "1bbc35cdf44cbe18ff8278bf1716afd338bf1ec3251eff71e8dc76d866a81ef6"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "guard_action",
+      "sha256": "3115c0a1a46c3884688dd7207350cfe4259759b5719b27384b0b89530ca5de14"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher_control.py",
+      "definition": "record_guard",
+      "sha256": "8e8a6e703b8cbabfd290bf99b0111273a8ee8640c6bc7e6321277dcaa5be3be7"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/parameters.py",
+      "definition": "grip_effort",
+      "sha256": "1e3c7652b823b7b8e03279664763246cc15e3fcd401506cc635f00e54fda2b96"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/models.py",
+      "definition": "active_parts",
+      "sha256": "0768c0b5b79dc47d7e96781ba96cba9673f412b117d6b91e8033c5baac3622f2"
+    },
+    {
+      "path": "src/castle_reasoning/data/plans.py",
+      "definition": "grid_parts",
+      "sha256": "83e81fa3496d6c6092497ae79e05e98bf8b963d95a8dec4cc240353aa0a8485a"
+    },
+    {
+      "path": "src/castle_reasoning/data/plans.py",
+      "definition": "removable",
+      "sha256": "01546921cc8ffccb119614e209efd57a78e69265a4dd19681cb6d19ca3232707"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/manipulation.py",
+      "definition": "hold_segment",
+      "sha256": "d6c43abe38cac8d09922ccf638612a5ed95b8f2ed22bb19976c25eaae93476e5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "stage_error_reason",
+      "sha256": "04f0cf3ca61536f519c38c6e02798ac6ccc76dbac6be6057cdf06e0f1efceacf"
+    },
+    {
+      "path": "src/castle_reasoning/data/plans.py",
+      "definition": "control_config",
+      "sha256": "440485ebef9f0a731feb515c3488ca5341e456b469a248351b929e084d8daad1"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/guards.py",
+      "definition": "audit_contacts",
+      "sha256": "62e224afb967ab1e100a9db24f9d4dae5f2fbcdfe13fa3c2f22e56bce109df82"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.__init__",
+      "sha256": "6e7db32d1be07c9ba26991fda93778a28640e60f821b31d007e4cedbc14700df"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.state",
+      "sha256": "68da0dbf3e31197207a03f1d6c9b32020f00d67ae5c03ad38a8a504b588b86cc"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.budget",
+      "sha256": "88ebce02d080aefb86d75e79053ef6b87b9c8ecd329b4dac0760a484f66cc71b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.segment",
+      "sha256": "58ad12b25e0d4118afa8db6408adcf0302b81d30717ead977e54fec667cc478e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._execute_segment",
+      "sha256": "199cd1151463991a5471d877f5fa30406ff4046454252795a5fb277b590b00a3"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._record_segment",
+      "sha256": "f3a3aea5ccad0c89d4fc442f04fc8bd9e1257304329a217836e4032a446d7718"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._finish_stage",
+      "sha256": "92670b2c5918ced01a75cc55572ec0534f37b32da6249eb9e041d44f3718065b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.move",
+      "sha256": "84392d6d37fe08a49fb216cda6b9d4f3fe9fcf57e887a5f752881d9a12782721"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._move",
+      "sha256": "3ce391df4daa7265ac55a70212acf2aa085a2829668b2bba282ee17b33b70b92"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.transport",
+      "sha256": "3e378c8ac2de49ef981577824ee4b9c17ea43ff22807a30c7600a9c4ddab60de"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._find_regrasp",
+      "sha256": "b455fceb1fb7302f520b94f36d0760e92cad8f6e2ec5b3de1da9dab720990c0a"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.regrasp",
+      "sha256": "78e7f66dfb32150185dcf9ea3041a92d6a9393574d7a0637aa798e57d6ee2b7f"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.home",
+      "sha256": "96fb2f6fc56ee03e2346f629f939b79a6892023fe817a1d738020880f55973b6"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.restore",
+      "sha256": "389d8cad42ec97001f74178b094e22e902ef1d9182d1d1e860a7d8e453e0538b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._checkpoint",
+      "sha256": "eccfa46aa9ee052e8b5105ca206351d80a568792c07a0739d33788bfee0f5936"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._rollback_target",
+      "sha256": "28b17d735993fe05e5cf9a4b4120d180c7f58fa86c0209f0c28da9bf2a979995"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner._roll_back",
+      "sha256": "1b6d7a9be3518c2c3dc2e9082ba79822aa321282e1f4ff4451325eb8ca54c8c8"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/runner.py",
+      "definition": "Runner.stage",
+      "sha256": "9dcd8b544a46c2491f53ad48d2aa8b4a739ecd26baffea080a96322f7f798d0a",
+      "removal_delegate": true
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/collect.py",
+      "definition": "execute",
+      "sha256": "1168c9f43983dd7b2fde24260be0863855e11f92c787199628001c742d436998"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/models.py",
+      "definition": "compile_model",
+      "sha256": "b75af5e920b821d19d171ff31a2407fa1d3ddf1e50f5e59e5639feb25f9a11bb"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/models.py",
+      "definition": "save_model",
+      "sha256": "c74be7901af4b9e98e4c59ea270b18662cbb2d316ae862bf11ede5ac88141267"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "WorldState.__init__",
+      "sha256": "3dd6874995a4e8e221f87495b42a4c4d5c6e1df7f07d6b200924cf8563163b6b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "WorldState.snapshot",
+      "sha256": "e0511a2067b43fadb7914185688105ea225f5573e2d4563bd50bb9269226a869"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "WorldCollector.__init__",
+      "sha256": "f46df600148fe97d8223973cbb5c5fa2d3c5b930b10d7cad713cbc1392a7c5e2"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "WorldCollector.reset",
+      "sha256": "36fc73753f5b550c7c33144136a3fcfcb82ae2310112152296d2bb3051f33d03"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "Runner.__init__",
+      "sha256": "b5a35f1314ad02cca5a2c1bf958cb7aa7ab9255fea46eb08b6833a8d96e43edf"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "Runner._execute_segment",
+      "sha256": "a8284003fb5dc57b87e64b8d51997168ac4cf0a6ac67ca957f822f9a4f5a70b1"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "Runner._finish_stage",
+      "sha256": "4dcf0807221ea10314d353455b3de0fb8b5c72e9213b273f57e872844829ec50"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "Runner.restore",
+      "sha256": "9d423e1674fc5f73ebf43c4612bc3e75dacd836f25b9bec6dc2859528ca4d8f5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "ConstructionGroup.__init__",
+      "sha256": "62862e370787d33120f98c742b3c8956580b6f0e34769b0404f0f17f8aeabf69"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "ConstructionGroup.execute",
+      "sha256": "1556926224b1ab75b38517c3f43786d1e5eb1d062a7d0b4a9692ded426782fd5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "ConstructionGroup.advance",
+      "sha256": "75dc610a8993917598fa0fd80b75d2b3948c9346275bac96353bb40d5bf181bb"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "ConstructionGroup.record_execution",
+      "sha256": "752b1ea47db900e6883ddcf1766803ecac7ad560881034f869db13b5ff6ff878"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "ConstructionGroup.waiting",
+      "sha256": "3a69d04f2c206329c1c5fbf130c275b4ec3f44f08e0e6838a56be3a1684c812b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/execution/session.py",
+      "definition": "ConstructionGroup.run_stage",
+      "sha256": "b39f99e1c102773786688b4a7036259d6008f69a2969df979c059ed8a96c1832"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/batched_collect.py",
+      "definition": "execute",
+      "sha256": "201875300bd2712d163c6f49e57581344ced5298714a831a1da6ef99eff9ff08"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/batched_collect.py",
+      "definition": "execute_many",
+      "sha256": "74f9b8669e85baef6aad12cf7cdcf02c48d603d925955cec576b1a9a9c5f8c05"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/batched_collect.py",
+      "definition": "_execute",
+      "sha256": "1b0970e01dc1f822dae6e1aa02b0cd58891932da2fdb323ea701d20a561eddbb"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "BlockTaskSpec.__post_init__",
+      "sha256": "7b90d2dfc8d90948741b591d1e856dd74d6c79f9f11cb99c1b878f1138eea08a"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "BlockTaskSpec.block_count",
+      "sha256": "ff1036c14a5115d3902acb49a0fb3405aa94c23f878a4a1d50fd2fcde2cbfc05"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "BlockTaskSpec.task_two",
+      "sha256": "cf199dc0667091aaa9d326673a8d352d423955dc2f9c43db6521717f99c10f85"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "GraspFamilySpec.__post_init__",
+      "sha256": "55145128220c124d8e115b39ffe69ce34f98a67c8c8442967bf0793ae5e672c5"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "recovery_starts_closed",
+      "sha256": "3c22e306821ecc8bf7b1b9554b7a639ef6d9168b7ad8125db0dc12b2d7b7ac2f"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "PhaseThresholds.__post_init__",
+      "sha256": "5954d2ec800f1fc0fdcf5b6889b7491a4f310ffe8348a0a97a6ce495b06651c5"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "transition_after_phase",
+      "sha256": "f27f4e6660cb6322caeec16fa7538289a4a46af430fa0749df4f6a00bf84c55a"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "phase_boundary_satisfied",
+      "sha256": "1d5fd61f3a7546e73f15b79eea87e0443fe5b9630bfe37b3eceec9199a067324"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "OracleParameters.__post_init__",
+      "sha256": "030fc9e08080419eef603a484a1ab60b91424cd975d68cf714a9f8b788bbc44f"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "waypoint_velocities",
+      "sha256": "cd792264e92ebfdcf0403215926e1b8ae5ac3a92f03f7d3161227cad77dd7bc0"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "hermite_segment",
+      "sha256": "19b663d9f806dac3c2172a87db55be28fc40a724f98128f1d326300ef85903df"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "quintic_smootherstep",
+      "sha256": "246b3db58d6c33c7355366856b61c1fe548e0e00829dc7615367c82c96ffd40f"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "smooth_orientation_reference",
+      "sha256": "5e921bee17feec162b4b814ea8e0da041b379a6c460bc02ba924a2c42485017c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "approach_direction_from_rpy",
+      "sha256": "eb028a9ad844ea88a7c0e59a3f6b92f30adc200d110ad5d06f0dd68828d1e378"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "build_waypoint_program",
+      "sha256": "bbe2525f217b363605ac956f1874464bd5887ab954b08e4f986728b631e6bac3"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "damped_least_squares",
+      "sha256": "f6b20052848bdf081a3b5869d5329147435b6ee0dc3dc25e688471196481279e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "_solve_spd_six",
+      "sha256": "bd1f76a3042430d7aad7ead6054bd2d0029d1e46f46e0dc58580f54fd8b6e919"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "_damped_least_squares_six",
+      "sha256": "22d73ffcbc09b278528f1c2296ce15c749a401de59878cb406fce83c65dc3ed5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "_solve_damped_least_squares",
+      "sha256": "d757abbe76e4dca5ad425325b6af4eaf3168adf6f0ba181666279e3b5a455887"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "device_damped_least_squares",
+      "sha256": "314f438bbd921955b5653a1044f8e4496c31b10cb8277980e227e0ab0348ba1c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "_pinch_jacobian",
+      "sha256": "e334da7a899574c1aefa99ec8dd26a1ae5d270c271fedc9d67be0e1a347cacfa"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/models.py",
+      "definition": "_named_id",
+      "sha256": "1698450312eb9a205122815e319f8162479527e17e1200a4df0f5255d5b78232"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/diagnostics/checks.py",
+      "definition": "compare_pinch_jacobian",
+      "sha256": "ecc3ba0feaf1c21c177c514eb2f74c0d618134c3ff3a8996644f86ba32b0f72b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "_waypoint_position_device",
+      "sha256": "6deae11d231eeb4dfa3c0076f323271e62e8f10d953c37bb065f8fe42da13ea8"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "_waypoint_velocity_device",
+      "sha256": "304f6d9c22eb240d72ccf9e4441402d7958a604058955dcd079ad99c59d0f4e8"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "_hermite_device",
+      "sha256": "a2dfca8287be367ba1c144b53c1ceb9bc3aae68d7d2ff38f59997002dd89ac1f"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/trajectories.py",
+      "definition": "_quintic_smootherstep_device",
+      "sha256": "2d955979dcc780ebaf1ada72999f8f9fe17a838d7bfcd3197879a1351488e0fa"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/planning/arm.py",
+      "definition": "_orientation_error",
+      "sha256": "4a67ec9bdbd3683357b40860c30c22c503a13b51d1a13c41a8ddd6f1e5525cfd"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_phase_failure_reason_device",
+      "sha256": "9ad3a6c17231f237588e56b6dfdd9be232420774565d40cdd669772188877f85"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_phase_boundary_satisfied_device",
+      "sha256": "15bb6d6349e5be5e58da241fc3355bd7ae37d10ee24a56e9640c29d2f1066346"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_advance_block_oracle_phase",
+      "sha256": "cdb6f34ea9457f2a05d909eeada7e3983bccf089ae94f538c21c6dd3e05f0c27"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_initial_grasp_family_device",
+      "sha256": "cff7934cdacf4df721b7b382caa90f1f936aea60006342480dbf65bb01daafad"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_proposal_grasp_family_device",
+      "sha256": "409aec5f7c557f9592802f4335c8b6c5d2181ce2bec47f8fcb7778a2c0a14571"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_initialize_block_oracle",
+      "sha256": "5c4e4cd1ec4b00b6a814923725778f587fd2e0532bf9fa93b217d1f0df7c67e2"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_block_oracle_action",
+      "sha256": "7da6c0a569865a6c10825b91b41a3b2f2fbf900683ec5c6d0388cb9ad94a4745"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_record_block_trace",
+      "sha256": "63bf13f90e948f1679182a35c30859bcaae02d27bdcd9b019898f17ee10d3894"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_increment_record_step",
+      "sha256": "ace105ab6c988d8341771ee13c2c343a99ab63c95de2df1b752e8c3a9e36cf29"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_mark_terminal_resets",
+      "sha256": "e9ca39e20e891204be749012920a7a160839ce8357f2e6f46fa66153f81ef29c"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_masked_copy_initial_state",
+      "sha256": "4795875e5876b7e4094a2aa2f62368bb9e80ce9b5215dbd18bb943b26547af92"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_masked_copy_vec3_field",
+      "sha256": "f1fa5f8c405da4a1a7f20f47b3381b35f8ef4a500c004fd887412aee298f9ecb"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_masked_copy_mat33_field",
+      "sha256": "b083523df1acf0efa708521fff38331235bd9b100c94d9ae067409b28171519a"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_masked_copy_spatial_field",
+      "sha256": "40da1b425ad7c6fffa2685ac9cdada00163b27d69d9b6b87189fc0c86f0d02a2"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_masked_zero_episode_step",
+      "sha256": "017fe1eac80b54b110eb1bc7c44627f137e9fd1b85163aab436ca828473b7771"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_increment_episode_step",
+      "sha256": "4eca000fd4df858ed4f8d2e5f54d58c6a179e7f82346c9a67f52cab7d13cd41f"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_record_transition_ring",
+      "sha256": "5353de96e5e6ba1e45ed4ce35f41805e54557f7076514e00b84288d538c57059"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "_publish_transition_ring_step",
+      "sha256": "c98558a615a062d4f59424a5542bcb60a8fcc5911cfb134b35db6765e9d31223"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "transition_ring_indices",
+      "sha256": "63371a882fa142e6f57dc7706e10c618ee77a95c7f315784d01344fc7af53056"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "TransitionRingStatus.__post_init__",
+      "sha256": "8f98dcf629279a0d5c5ad3a6fc097e4719017adc33a2c3641afbebea24fb0e1d"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "TransitionRingStatus.available_steps",
+      "sha256": "ed63d74264c023165799d643244a25c2544f96744d6ebf1b57ed10e32200ff9f"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "TransitionRingStatus.checked_acknowledgement",
+      "sha256": "0f009ba06dca77c180ad48f772ef42a5235933b24b44a30701067db2d7dff465"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "BlockCollectionMetrics.world_control_steps_per_second",
+      "sha256": "629a05dba24ad99194ec06cef097b2f07789945129c008611b91f5c2615d475f"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.__init__",
+      "sha256": "283651ea7d7e2f06b264568a31da7c63502e8d94a4a084505e021a036359238a"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector._launch_initialize",
+      "sha256": "67c6a56bcebc4dcf308ae716d85479f2c2f20f4eecd0fbdde2665a065332023b"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector._launch_device_terminal_reset",
+      "sha256": "d7191ef55acb4fb24ee7b20abed0d64c8de50306c60a779e0dde6604e4dcd0b2"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector._launch_auto_reset",
+      "sha256": "fd365bc573155c476b34a721771210f1f4be86267172f6246c29d863223e79ac"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector._launch_transition_ring_record",
+      "sha256": "2117cfb935212db955305d2375f59d9f4e2bd4b7be0b661728c0e5c07405f1ea"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector._launch_collection_step",
+      "sha256": "b77297dd3c1dcadc18891ef9d8d74831380d6a612b2f71ddd9e6fb802c1920c6"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.reset",
+      "sha256": "9507d42243ab46dec49ef9f9f10b115113ca5029ad28e7410c9943795e194af6"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.step",
+      "sha256": "5c7134822f997c7f56653b5fd10b751a6ae17aa1ba3cd25ee1457ace6afc0f5e"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.snapshot",
+      "sha256": "a9bb6d454f45d6f3609805a3da02d5c0f23913cd22c8af0deaab5185505744fc"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.transition_ring_status",
+      "sha256": "4e94baf3a85bd9139eddf83ffc5f442588859071c80753ef69de10f0ad38c78a"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.acknowledge_transition_ring",
+      "sha256": "879170f38316db65a59425ce64e4196c33463ef8c499398d435f2f14a0b40681"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.transition_ring",
+      "sha256": "0589cc0304c17979a05a43a47fc298ad30bb06d11eb924534761f930b602292d"
+    },
+    {
+      "path": "src/castle_reasoning/data/assembly/teacher.py",
+      "definition": "MJWarpBlockCollector.trace",
+      "sha256": "6d777fbf188175a29e5e9e4a3ac6dfe0303ed70440a184690a24d050c4dfb6cc"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "_mix_u32_device",
+      "sha256": "89cc6ca25f61f6ea675322db3945adba3302bfdc984f8f6fac716314a2e8a52b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "_counter_random_u32_device",
+      "sha256": "970db2200b934430a0bd9a4b7f7c4dc1a1479331416e6094d25b3306eed9b496"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "_increment_episodes",
+      "sha256": "735c2f7a3fe7944b9a223dabe037b9cd01657d4aeddecc84de8efffb213b7c7e"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "_write_counter_random",
+      "sha256": "80f84d48633c3be0ef37a294cc99ed4ebe90a8c0c1ec7e5471ec5cdf42b4a10d"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "_masked_zero",
+      "sha256": "403117f28e48d82a2b84bb3fe7197a06fff0635889d0f914458c523cae317dbe"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "BufferCapacities.__post_init__",
+      "sha256": "675e4e8a3bd2afb1715faa4c734a0c18c42f0d6143172c9e266e4d7ad7e37dee"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "BufferCapacities.make_data_kwargs",
+      "sha256": "b21dcb3bc7a613aa4fbbd611f4d49fcce6572e388c0a6a12b7f57cfd506aad9c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "SimulationOverflowError.__init__",
+      "sha256": "f473c5abd203a6a421f45b8c2e876e4e98a27e0d4952916da6f8ef08812875a7"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "overflow_report",
+      "sha256": "681df9b50705f7d50a0db33b3f3cb608ead1add25364589f17aac63e9bb9cef9"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "raise_for_overflow",
+      "sha256": "3b345617e209917526ade9040d165984f3c792f188de8d3e6f1fc3e219e54677"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "StepMetrics.world_steps_per_second",
+      "sha256": "86bf5c6779f046b3f7b8e2df301f08ba5e0b50a4a029524aff87f2f28e471d35"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.__init__",
+      "sha256": "a2d7b6dd67e105050fcd0df401367bae1da9c70eabc8f5ff5af7ea83d9cd6ec5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.from_xml_string",
+      "sha256": "e1679b5e28a0648122338bbac981d0a82b355e7e518b7f11930c183c27d1bfcb"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine._device_array",
+      "sha256": "dff66ae838441b8c416e539d7e5961c5615a923c4a5bca874dad1ca04d68969c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.reset",
+      "sha256": "3343a9c53641418591216e6b69c2efaafc5beb2eff8107a66a3c1f1eb6679254"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.launch_reset_metadata",
+      "sha256": "3682291c669eb5202dd489fd65eb2da899e949f31f76043f19fe61222bb08a74"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.set_state",
+      "sha256": "f4bd4d387221ed6765d22e471d2e40b2b6f464e45b343ab87e91c418fe8f5865"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.set_control",
+      "sha256": "2c21a7577cca23f65a71ef4be1d585c3127625d7a025eaff9dd18a95213918b6"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine._launch_steps",
+      "sha256": "562ace6217f1d91523ada787f65635f38e38fa327a59cd4ba6bef7a478854129"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.step",
+      "sha256": "f9b655bb44c590845ff3d7208af54ec15a521529e4233ea2d9ac98cacd938b7c"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.assert_healthy",
+      "sha256": "340ae341275292c4e827f672a1088ce19c13d87f75aa0ee218bf241d22337c73"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.contact_counts",
+      "sha256": "85e1233ab1dd72dd8801c286a9b65e846009840d965441c1c2be612fd063e11f"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/simulation/engine.py",
+      "definition": "MJWarpEngine.snapshot",
+      "sha256": "59cb2afa25eebfb48cc94b535ac25e6e58a6fd0f59df92b6e5a8891446ec967b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/parameters.py",
+      "definition": "ControllerSpec.__post_init__",
+      "sha256": "5334c3a5fb8884aef0804a5fde25800219fa3903a9e92797b917ebf4b644e90b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/parameters.py",
+      "definition": "ControllerSpec.action_width",
+      "sha256": "83e65c875a8492ddfedd868d2013fc88d33e0cb0cc59243a7378595ddae1eed8"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/parameters.py",
+      "definition": "ControllerSpec.physics_steps_per_control",
+      "sha256": "85ff8dbaf8994e8732a24222c28240c42e8eafa341948130b0b90d1cfc2a0193"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/parameters.py",
+      "definition": "ControllerSpec.control_frequency_hz",
+      "sha256": "4e02974370808f71e6bae0fa31a00abec497c4e42b59b5bfdd40d9b9e3e90dac"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "_actuator_name",
+      "sha256": "f989a58f353168803cf75d8135dde122cd2b53ece870a2e2fe19efaf0fd05569"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "_validate_ogbench_model",
+      "sha256": "c833ecc66b20afa7e502fe33d63a04ecf60d3c4d2de8f5bf8098b4ebde36a858"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "_sync_arm_targets",
+      "sha256": "00f36feb1f5ca7b7226b9a2f117fb30a4556bc268d18fa2d2f142bc04f2a916b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "_apply_velocity_action",
+      "sha256": "cc346da2e99dd0736141aa4e0beb37f17413c4bd6bebd0b487634055b929af5b"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "MJWarpJointVelocityController.__init__",
+      "sha256": "86b01c3f19d928a6998b3981c9073a1737d08370c721b136cba3183a7ec9c599"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "MJWarpJointVelocityController.launch_device_control_step",
+      "sha256": "6bf087b58a23339403040da07e271df34a5e26036040f01f40eb11a018c7d7a3"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "MJWarpJointVelocityController.launch_sync_targets",
+      "sha256": "83d30486962aa23a19c4874dc4d213f443d2083e974240d8c814dd8907a15fd6"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "MJWarpJointVelocityController.sync_targets",
+      "sha256": "753ae468797f6b757b5f515bdb0b133e33706c6e5b2181eb20cd9750d2f69c65"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "MJWarpJointVelocityController.reset",
+      "sha256": "648d5d5e7389dfd5adc0835d0cb780c85b6deeb11aa64713d699400b57cf34f5"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "MJWarpJointVelocityController.step",
+      "sha256": "cfcd85a13039df5cbc1da7e0586d84424ebb18a95c2e5fe58777a762f06fef70"
+    },
+    {
+      "path": "src/castle_reasoning/runtime/control/joint_velocity.py",
+      "definition": "MJWarpJointVelocityController.step_device",
+      "sha256": "ef32e7ae36d2ab6843569a0affc7eb39749183359e7575d1daf5d090eee46c6d"
+    }
+  ]
+}
