@@ -47,9 +47,13 @@ mass support structure of a proposed building.
 
 ## Quick start
 
-Requirements: Linux x86_64 and [Pixi](https://pixi.sh/). Robot execution
-requires an NVIDIA GPU; rendering requires EGL/OpenGL. Pixi installs Python
-3.12 and the pinned dependencies.
+Requirements:
+
+- Linux x86_64.
+- **[Pixi](https://pixi.sh/)** must be installed before running the setup
+  commands; it manages Python 3.12 and the pinned dependencies.
+- **An NVIDIA GPU with a working driver** is required to run the benchmark.
+  Rendering also requires EGL/OpenGL.
 
 The default evaluation uses the paper's nine-task benchmark, all from the
 October 11 campaign (`campaign-tasks-20261011`):
