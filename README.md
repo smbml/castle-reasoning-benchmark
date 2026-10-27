@@ -54,6 +54,8 @@ Requirements:
   commands; it manages Python 3.12 and the pinned dependencies.
 - **An NVIDIA GPU with a working driver** is required to run the benchmark.
   Rendering also requires EGL/OpenGL.
+- **Model access** for LLM evaluation: either a model API endpoint or a local
+  model server running separately from the benchmark.
 
 The default evaluation uses the paper's nine-task benchmark, all from the
 October 11 campaign (`campaign-tasks-20261011`):
@@ -71,12 +73,15 @@ git clone https://github.com/smbml/castle-reasoning-benchmark.git
 cd castle-reasoning-benchmark
 # Install Python 3.12 and the locked runtime dependencies.
 pixi install --locked
-# Verify source/build hashes, compile a workcell, and take a native MuJoCo step.
-# This installation check does not run a GPU episode.
+# Verify source/build hashes and take native and CUDA workcell steps.
+# This check fails if no working GPU is available.
 pixi run --locked check-runtime
 # Download the nine paper targets' plans, scenes, and recorded states into dataset/.
 # Each target uses its first accepted demonstration in published index order.
-pixi run --locked download-tasks --tasks U0008,U0080,U0149,U0002,U0007,U0011,U0012,U0024,U0052
+# Allow up to 1 GiB for this nine-task set.
+pixi run --locked download-tasks \
+  --tasks U0008,U0080,U0149,U0002,U0007,U0011,U0012,U0024,U0052 \
+  --max-download-mb 1024
 ```
 
 Task data is stored in `dataset/` by default. Set `CASTLE_ROOT` or pass
@@ -85,28 +90,38 @@ the directory, verifies the pinned inputs, and reuses verified files.
 
 ### Evaluate a model
 
-Continue from the benchmark directory above. The harness installs the benchmark
-and patched runtime from pinned Git dependencies and can reuse the task data
-you just downloaded.
+**Start in your `castle-reasoning-benchmark/` checkout**, in the same terminal
+used for the downloads. The harness installs the benchmark and patched runtime
+from pinned Git dependencies and can reuse the task data you just downloaded.
 
 ```sh
-# Share the downloaded tasks with the harness.
+# Set this from castle-reasoning-benchmark/, before changing directories.
 export CASTLE_ROOT="$PWD/dataset"
-# Download the evaluation harness alongside the benchmark.
-git clone https://github.com/lianegalanti/castle-harness.git ../castle-harness
+# Download the harness's dev branch alongside the benchmark.
+git clone --branch dev https://github.com/lianegalanti/castle-harness.git ../castle-harness
 # Enter the harness directory.
 cd ../castle-harness
-# Use the tested harness revision with the pinned benchmark and Pixi runner.
-git checkout bde21ab987fc7c96e2e2764f2d1997b992605441
 # Install the harness's locked environment, including the patched runtime.
 pixi install --locked
-# Check that the installed runtime is intact and can take a native MuJoCo step.
+# Check runtime integrity and execution on the local GPU.
 pixi run --locked check-runtime
 ```
 
-Run a model server separately, or use an existing OpenAI-compatible Chat
-Completions endpoint with tool calling. Set its `/v1` URL, served model name,
-and authentication key, then evaluate the nine-task benchmark:
+`export CASTLE_ROOT` applies only to this shell and its child processes; it
+does not persist in new terminals. Its absolute path stays valid after `cd`.
+In a new terminal, set `CASTLE_ROOT` to the absolute path of the benchmark's
+`dataset/` directory, then `cd` into `castle-harness/` before running evaluation.
+
+You need an OpenAI-compatible Chat Completions endpoint with tool calling:
+either a model API service or a local model server. For local serving, see
+[vLLM's server setup](https://docs.vllm.ai/en/latest/serving/online_serving/openai_compatible_server/)
+and [tool-calling configuration](https://docs.vllm.ai/en/latest/features/tool_calling/).
+Run the server in a separate environment and terminal; it is not installed by
+this Pixi environment. Enable automatic tool choice and select the tool-call
+parser appropriate for your model.
+
+From `castle-harness/`, set the endpoint's `/v1` URL, served model name, and
+authentication key, then evaluate the nine-task benchmark:
 
 ```sh
 # Replace this with your model endpoint's base URL.
@@ -120,8 +135,6 @@ pixi run --locked run \
   --backend openai --base-url "$BASE_URL" --model "$MODEL" \
   --condition wipe --target-mode positions \
   --system-prompt prompts/system_level1.txt --device cuda:0 \
-  --max-turns 60 --max-total-tokens 400000 \
-  --max-sim-steps 200000 --max-wall-s 1800 \
   --record-trajectory --out runs/my-model-positions
 # Inspect per-task pass/fail results, token counts, and failure reasons.
 cat runs/my-model-positions/results.jsonl

@@ -1,7 +1,9 @@
 """Cli."""
 
 import argparse
+import contextlib
 import json
+import sys
 
 import castle_reasoning.data.download as data_download
 import castle_reasoning.runtime.diagnostics.checks as checks
@@ -21,7 +23,8 @@ def main() -> None:
     args = parser.parse_args()
     try:
         if args.command == "check-runtime":
-            result = checks.check_runtime()
+            with contextlib.redirect_stdout(sys.stderr):
+                result = checks.check_runtime()
         else:
             receipt = data_download.download_tasks(
                 [

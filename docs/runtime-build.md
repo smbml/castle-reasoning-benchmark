@@ -13,7 +13,8 @@ The scripted teacher and collection workflows live in
 
 `check-runtime` verifies installed package versions and source hashes, the
 active-world patch and its build manifest, then compiles a workcell and takes
-a finite native MuJoCo step. It does not run a GPU episode.
+finite native MuJoCo and CUDA MuJoCo-Warp steps. It requires a working NVIDIA
+GPU and reports the tested CUDA device. It does not run a full robot episode.
 
 ## Reproduce the active runtime
 

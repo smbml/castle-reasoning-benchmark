@@ -135,7 +135,7 @@
     "module": "__init__.py",
     "files": {
       "__init__.py": "e4039ff3d79cdd95d9e000f21ffa49ca10bdb880f87439a686b1aabb377a3466",
-      "cli.py": "0b5ae3865cb1a7da1e31df147d35266415e3ccab1d0f6c1ee8eeb4743c251367",
+      "cli.py": "99770ef6ac6c43ba024c99615fc49a4c21334fe173aa72dfee43cedfcb00fde2",
       "data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "data/assembly/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "data/assembly/batched_collect.py": "8f5e7c6d0295438b11bf8ba7b5211cd1e03bd5984788a674ca55ce90b486bfb7",
@@ -181,7 +181,7 @@
       "runtime/control/parameters.py": "45bc5d03a6668013fb24a274008eb96e847eff41838c3ba5845d4d1031ef5615",
       "runtime/control/tracking.py": "ce5a6e5202adec2c8792f58109b6eb5a6c3571cb397334007fdf64faf092a610",
       "runtime/diagnostics/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "runtime/diagnostics/checks.py": "e30047e66091a300f60118d6e3e45eff44752e8d9b38bc5f5f8aaceb319042bb",
+      "runtime/diagnostics/checks.py": "53a16849c2a126af2b0c6aa052eca7ff8f15779422222d6c0df5d87f79e28f14",
       "runtime/diagnostics/io_timing.py": "d5b4678382e7917028c1e25d619f4337a9146ea75906b205399d79c8a8149c35",
       "runtime/diagnostics/physics_profile.py": "9d3ca3619c4b3773e4dec30396b9f6fdd61632b1556106353be9d847ce44fc73",
       "runtime/diagnostics/provenance.py": "8c5bf7d39a93e8c4f0ac2565a1e7ae5775bdb33ca3265d8c77b0b10be2d1a67a",

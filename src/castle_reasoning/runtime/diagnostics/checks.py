@@ -14,9 +14,14 @@ import castle_reasoning.runtime.simulation.models as models
 
 
 def check_runtime() -> dict:
-    """Verify source/build identity and a finite native workcell step."""
+    """Verify source/build identity and finite native and CUDA workcell steps."""
     import mujoco
     import numpy as np
+    if not wp.is_cuda_available():
+        raise RuntimeError(
+            "An NVIDIA GPU with a working CUDA driver is required for "
+            "check-runtime; no CUDA device is available."
+        )
     verified_sources = provenance.bundled_sources()
     active_runtime = provenance.runtime_provenance()
     model, qpos = models.make_model(
@@ -29,6 +34,11 @@ def check_runtime() -> dict:
     mujoco.mj_step(model, state)
     if not np.isfinite(state.qpos).all() or not np.isfinite(state.qvel).all():
         raise RuntimeError("Native workcell step produced nonfinite state")
+    engine = simulation_engine.MJWarpEngine(
+        model, nworld=1, device="cuda:0", graph=False
+    )
+    engine.set_state(qpos=qpos[None], qvel=np.zeros((1, model.nv)))
+    engine.step()
     return {
         "sources": verified_sources,
         "active_runtime": active_runtime,
@@ -45,7 +55,9 @@ def check_runtime() -> dict:
             )
         },
         "native_step_finite": True,
-        "gpu_tested": False,
+        "gpu_tested": True,
+        "gpu_device": str(engine.device),
+        "gpu_step_finite": True,
     }
 
 

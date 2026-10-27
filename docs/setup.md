@@ -13,9 +13,11 @@ pixi install --locked
 pixi run --locked check-runtime
 ```
 
-`check-runtime` verifies installed source/build hashes, compiles a workcell,
-and takes one finite native MuJoCo step. It reports `gpu_tested: false`;
-successful GPU execution must be checked separately.
+`check-runtime` requires an NVIDIA GPU with a working CUDA driver. It verifies
+installed source/build hashes, compiles a workcell, and takes finite native
+MuJoCo and CUDA MuJoCo-Warp steps. It reports `gpu_tested: true` and fails if
+CUDA is unavailable or the GPU step fails. This is a small installation check;
+full robot episodes are evaluated separately.
 
 Pixi installs two normal distributions: this package and
 `mujoco-warp==3.13.0+castle.1` from `third_party/mujoco-warp`. The latter
