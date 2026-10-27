@@ -8,18 +8,9 @@ assembled structure's poses, support contacts, and stability.
 This package provides the task generator, pick-and-place planner, simulation
 runtime, and tools for downloading existing benchmark tasks. The
 [LLM evaluation harness](https://github.com/lianegalanti/castle-harness)
-provides agent tools and episode evaluation. That repository is currently
-private; this release provides generation, task data access, and the execution
-runtime independently.
+provides agent tools and episode evaluation.
 
 ![Recorded robot assembly demonstrations, expanding from one scene to a large grid.](docs/media/benchmark-scale.gif)
-
-Recorded robot assembly demonstrations at increasing scale.
-
-![Support graph and corresponding 18-part tower, colored by generation operation.](docs/media/support-graph-and-tower.png)
-
-An illustration composed with the generation operators. Arrows run from each
-supporting part to the part above it; colors identify the operations.
 
 ## Dataset
 
@@ -49,10 +40,10 @@ middle 50% from **9 to 18**. Counting each target once:
   109 hours of simulated execution. Median duration is 3 minutes 22 seconds;
   the range is 1 minute 28 seconds to 10 minutes 49 seconds.
 
-These statistics are computed from the linked indices at the pinned dataset
-revision. Collection began with 1,100 screened plans; 28 produced no accepted
-demonstration. Acceptance measures the scripted collector's checks. Overall
-raw-proposal generation yield cannot be recovered from the uploaded metadata.
+We generate these procedurally using a grammar which describes the center of
+mass support structure of a proposed building.
+
+![Support graph and corresponding 18-part tower, colored by generation operation.](docs/media/support-graph-and-tower.png)
 
 ## Quick start
 
@@ -61,31 +52,83 @@ requires an NVIDIA GPU; rendering requires EGL/OpenGL. Pixi installs Python
 3.12 and the pinned dependencies.
 
 ```sh
+# Download the benchmark source.
 git clone https://github.com/smbml/castle-reasoning-benchmark.git
+# Enter the benchmark directory.
 cd castle-reasoning-benchmark
+# Install Python 3.12 and the locked runtime dependencies.
 pixi install --locked
+# Verify source/build hashes, compile a workcell, and take a native MuJoCo step.
+# This installation check does not run a GPU episode.
 pixi run --locked check-runtime
+# Download only these targets' plans, scenes, and recorded states into dataset/.
+# Each target uses its first accepted demonstration in published index order.
 pixi run --locked download-tasks --tasks S0074,U0008
 ```
-
-The runtime check verifies source/build hashes, compiles a workcell, and takes
-a native MuJoCo step. GPU episode execution is a separate check. The download
-command retrieves one task from each campaign, including its plan, compiled
-scene, and recorded states. It selects the first accepted demonstration in
-each target's published index order; it downloads only the requested targets.
 
 Task data is stored in `dataset/` by default. Set `CASTLE_ROOT` or pass
 `--root` to `download-tasks` to use another directory. The downloader creates
 the directory, verifies the pinned inputs, and reuses verified files.
 
-## Using the benchmark
+### Evaluate a model
+
+Continue from the benchmark directory above. The harness installs the benchmark
+and patched runtime from pinned Git dependencies and can reuse the task data
+you just downloaded.
+
+```sh
+# Share the downloaded tasks with the harness.
+export CASTLE_ROOT="$PWD/dataset"
+# Download the evaluation harness alongside the benchmark.
+git clone https://github.com/lianegalanti/castle-harness.git ../castle-harness
+# Enter the harness directory.
+cd ../castle-harness
+# Use the tested harness revision with the pinned benchmark and Pixi runner.
+git checkout b83eb0a30f4ec03c623e8aa3d414670cf5f1a9d4
+# Install the harness's locked environment, including the patched runtime.
+pixi install --locked
+# Check that the installed runtime is intact and can take a native MuJoCo step.
+pixi run --locked check-runtime
+```
+
+Run a model server separately, or use an existing OpenAI-compatible Chat
+Completions endpoint with tool calling. Set its `/v1` URL, served model name,
+and authentication key, then evaluate one downloaded task:
+
+```sh
+# Replace this with your model endpoint's base URL.
+export BASE_URL="http://127.0.0.1:8000/v1"
+# Replace this with the model name accepted by that endpoint.
+export MODEL="your-served-model"
+# Use your endpoint's API key; unauthenticated local servers can use "local".
+export OPENAI_API_KEY="local"
+# Evaluate U0008 with target coordinates and save the episode and trajectory.
+pixi run --locked run \
+  --backend openai --base-url "$BASE_URL" --model "$MODEL" \
+  --tasks U0008 --condition wipe --target-mode positions \
+  --system-prompt prompts/system_level1.txt --device cuda:0 \
+  --max-turns 60 --max-total-tokens 400000 \
+  --max-sim-steps 200000 --max-wall-s 1800 \
+  --record-trajectory --out runs/my-model-positions
+# Inspect per-task pass/fail results, token counts, and failure reasons.
+cat runs/my-model-positions/results.jsonl
+```
+
+Episode tool logs and recorded trajectories are in
+`runs/my-model-positions/episodes/`. Use a new `--out` directory for each run.
+For target coordinates plus a worked example, set `--system-prompt` to
+`prompts/system_level1_worked.txt`. For image-only evaluation, use
+`--target-mode image --system-prompt prompts/system_image.txt` with a
+vision-capable model endpoint. Download any additional task IDs with
+`pixi run --locked download-tasks --tasks ID1,ID2` before evaluating them.
 
 See [setup](docs/setup.md) for installation, task downloads, and harness
 integration. [Tasks](docs/tasks.md) describes generation, artifact formats,
-and success checks. Use the evaluation harness for scripted or language-model
-episodes.
+and success checks.
 
 ## Development
+
+From the benchmark checkout:
 
 ```sh
 pixi run --locked test
@@ -110,5 +153,3 @@ Tests live in `tests/` and usage documentation in `docs/`.
 Castle Reasoning's first-party code and documentation are [MIT licensed](LICENSE).
 MuJoCo-Warp and other dependencies retain their own licenses; see
 [third-party notices](THIRD_PARTY_NOTICES.md) and [runtime builds](docs/runtime-build.md).
-The MIT code license does not cover the separately hosted dataset; see its
-Hugging Face card for dataset licensing.
