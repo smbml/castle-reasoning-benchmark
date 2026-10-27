@@ -63,9 +63,9 @@ the budget is checked. Public downloads do not use an account token.
 The [Castle LLM harness](https://github.com/lianegalanti/castle-harness)
 supplies agent tools, scripted/LLM runners, and trajectory rendering. This
 package supplies its simulator, planner, and controller. The harness repository
-is currently private; the runtime, generation tools, and task downloader in this
-release can be used independently. The integration examples below are for
-consumers with access to a harness checkout.
+includes a locked Pixi environment with both runtime distributions pinned to
+the same benchmark commit. See the [model evaluation quick start](../README.md#evaluate-a-model)
+for clone, installation, endpoint configuration, and evaluation commands.
 
 A consuming Pixi workspace must select both distributions. For adjacent local
 checkouts, add these entries to its `pixi.toml`:
