@@ -78,7 +78,10 @@ pixi install --locked
 pixi run --locked check-runtime
 # Download the nine paper targets' plans, scenes, and recorded states into dataset/.
 # Each target uses its first accepted demonstration in published index order.
-pixi run --locked download-tasks --tasks U0008,U0080,U0149,U0002,U0007,U0011,U0012,U0024,U0052
+# Allow up to 1 GiB for this nine-task set.
+pixi run --locked download-tasks \
+  --tasks U0008,U0080,U0149,U0002,U0007,U0011,U0012,U0024,U0052 \
+  --max-download-mb 1024
 ```
 
 Task data is stored in `dataset/` by default. Set `CASTLE_ROOT` or pass
