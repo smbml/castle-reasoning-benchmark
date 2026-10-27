@@ -51,6 +51,15 @@ Requirements: Linux x86_64 and [Pixi](https://pixi.sh/). Robot execution
 requires an NVIDIA GPU; rendering requires EGL/OpenGL. Pixi installs Python
 3.12 and the pinned dependencies.
 
+The default evaluation uses the paper's nine-task benchmark, all from the
+October 11 campaign (`campaign-tasks-20261011`):
+
+| Difficulty | Parts | Task IDs |
+| --- | --- | --- |
+| Easy | 7 | `U0008`, `U0080`, `U0149` |
+| Medium | 19–24 | `U0002`, `U0007`, `U0011` |
+| Hard | 29–31 | `U0012`, `U0024`, `U0052` |
+
 ```sh
 # Download the benchmark source.
 git clone https://github.com/smbml/castle-reasoning-benchmark.git
@@ -61,9 +70,9 @@ pixi install --locked
 # Verify source/build hashes, compile a workcell, and take a native MuJoCo step.
 # This installation check does not run a GPU episode.
 pixi run --locked check-runtime
-# Download only these targets' plans, scenes, and recorded states into dataset/.
+# Download the nine paper targets' plans, scenes, and recorded states into dataset/.
 # Each target uses its first accepted demonstration in published index order.
-pixi run --locked download-tasks --tasks S0074,U0008
+pixi run --locked download-tasks --tasks U0008,U0080,U0149,U0002,U0007,U0011,U0012,U0024,U0052
 ```
 
 Task data is stored in `dataset/` by default. Set `CASTLE_ROOT` or pass
@@ -84,7 +93,7 @@ git clone https://github.com/lianegalanti/castle-harness.git ../castle-harness
 # Enter the harness directory.
 cd ../castle-harness
 # Use the tested harness revision with the pinned benchmark and Pixi runner.
-git checkout b83eb0a30f4ec03c623e8aa3d414670cf5f1a9d4
+git checkout bde21ab987fc7c96e2e2764f2d1997b992605441
 # Install the harness's locked environment, including the patched runtime.
 pixi install --locked
 # Check that the installed runtime is intact and can take a native MuJoCo step.
@@ -93,7 +102,7 @@ pixi run --locked check-runtime
 
 Run a model server separately, or use an existing OpenAI-compatible Chat
 Completions endpoint with tool calling. Set its `/v1` URL, served model name,
-and authentication key, then evaluate one downloaded task:
+and authentication key, then evaluate the nine-task benchmark:
 
 ```sh
 # Replace this with your model endpoint's base URL.
@@ -102,10 +111,10 @@ export BASE_URL="http://127.0.0.1:8000/v1"
 export MODEL="your-served-model"
 # Use your endpoint's API key; unauthenticated local servers can use "local".
 export OPENAI_API_KEY="local"
-# Evaluate U0008 with target coordinates and save the episode and trajectory.
+# Evaluate the default nine tasks with target coordinates and record each episode.
 pixi run --locked run \
   --backend openai --base-url "$BASE_URL" --model "$MODEL" \
-  --tasks U0008 --condition wipe --target-mode positions \
+  --condition wipe --target-mode positions \
   --system-prompt prompts/system_level1.txt --device cuda:0 \
   --max-turns 60 --max-total-tokens 400000 \
   --max-sim-steps 200000 --max-wall-s 1800 \
@@ -116,6 +125,9 @@ cat runs/my-model-positions/results.jsonl
 
 Episode tool logs and recorded trajectories are in
 `runs/my-model-positions/episodes/`. Use a new `--out` directory for each run.
+Omitting `--tasks` runs all nine paper tasks; pass `--tasks U0008` for a single
+task or `--tasks ID1,ID2` to select another set.
+
 For target coordinates plus a worked example, set `--system-prompt` to
 `prompts/system_level1_worked.txt`. For image-only evaluation, use
 `--target-mode image --system-prompt prompts/system_image.txt` with a
